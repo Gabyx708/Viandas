@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
+﻿namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
 {
     public class Order
     {
         public string OrderID { get; private set; }
         public string UserID { get; private set; }
-        public string DiscountID { get;private set; }
+        public string DiscountID { get; private set; }
         public OrderStatus Status { get; private set; }
 
         private readonly Discount _discount;
         public List<OrderItem> Items { get; private set; }
         public List<OrderTransition> Transitions { get; private set; }
+
+        private readonly OrderID _orderID;
         public enum OrderStatus
         {
             CONFIRMED,
             CANCELLED
         }
 
-        public Order(string userId,Discount discount)
+        public Order(string userId, Discount discount)
         {
-            OrderID = $"{DateTime.Now}"; //TODO: corregir ,extraer a un metodo
+            _orderID = new OrderID(userId);
+            OrderID = _orderID.Value;
             UserID = userId;
             _discount = discount;
 
@@ -52,11 +49,20 @@ namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
             return totalAmount * discountFactor;
         }
 
+        public decimal GetDiscountAmount()
+        {
+            decimal totalAmount = GetTotalAmount();
+            decimal discountPercentage = _discount.GetAmount();
+            return (totalAmount * discountPercentage) / 100;
+        }
+
         public void AddTransition(OrderTransition transition)
         {
             Status = transition.GetToStatus();
             Transitions.Add(transition);
         }
+
+
 
 
     }
