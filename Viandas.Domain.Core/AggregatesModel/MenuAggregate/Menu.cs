@@ -45,6 +45,11 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
             this.Options.Add(option);
         }
 
+        public void Cancel()
+        {
+           // this.orders.Select(o => o.Cancel)
+        }
+
 
     }
 }

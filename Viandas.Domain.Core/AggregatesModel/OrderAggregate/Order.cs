@@ -6,6 +6,7 @@
         public string UserID { get; private set; }
         public string DiscountID { get; private set; }
         public OrderStatus Status { get; private set; }
+        public DateTime CreationDate { get; private set; }
 
         private readonly Discount _discount;
         public List<OrderItem> Items { get; private set; }

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Viandas.Domain.Core.AggregatesModel.OrderAggregate;
+﻿using Viandas.Domain.Core.AggregatesModel.OrderAggregate;
 
 namespace Viandas.Domain.Core.AggregatesModel.BillAggregate
 {
     public class Bill
     {
-        private int Year { get; }
-        private int Month { get; }
+        private int _year;
+        private int _month;
         private DateTime _startDate;
         private DateTime _endDate;
 
-        public decimal TotalAmount { get;}
+        public decimal TotalAmount { get; }
         public decimal SubtotalAmount { get; }
         public decimal TotalDiscount { get; }
         public decimal TotalToPay { get; }
@@ -38,8 +33,19 @@ namespace Viandas.Domain.Core.AggregatesModel.BillAggregate
             CancelledOrders = GetCancelledOrdersQuantity();
             ConfirmedOrders = GetConfirmedOrdersQuantity();
 
+            ConfigurateDates();
             GroupByUsers();
         }
+
+        private void ConfigurateDates()
+        {
+            _startDate = _orders.Max(o => o.CreationDate);
+            _endDate = _orders.Min(o => o.CreationDate);
+
+            _year = _startDate.Year;
+            _month = _startDate.Month;
+        }
+
 
         public decimal CalculateTotalAmount()
         {
@@ -82,7 +88,7 @@ namespace Viandas.Domain.Core.AggregatesModel.BillAggregate
                 string userId = group.Key;
                 List<Order> userOrders = group.ToList();
 
-                UserBills.Add(new UserBill(userId,userOrders));
+                UserBills.Add(new UserBill(userId, userOrders));
             }
         }
     }
