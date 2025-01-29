@@ -1,11 +1,13 @@
-﻿namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
+﻿using Viandas.Domain.Core.AggregatesModel.MenuAggregate;
+
+namespace Viandas.Infrastructure.Interface.IRepositories
 {
     public interface IMenuRepository
     {
         Menu InsertMenu(Menu menu);
         Menu GetMenuById(string menuID);
         Menu GetMenuWithOrders(string menuID);
-        IEnumerable<Menu> GetMenusBetweenTwoDates(DateTime firstDate, DateTime lastDate);
+        List<Menu> GetMenusBetweenTwoDates(DateTime firstDate, DateTime lastDate);
         Menu UpdateMenu(Menu menu);
     }
 }
