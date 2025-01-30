@@ -1,21 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Viandas.Domain.Core.AggregatesModel.MenuAggregate;
-using Viandas.Domain.Core.AggregatesModel.OrderAggregate;
-using Viandas.Domain.Core.AggregatesModel.UserAggregate;
+using Viandas.Infrastructure.Data.EntityConfig;
+using Viandas.Infrastructure.Data.EntityModel;
+using Viandas.Infrastructure.Data.EntityModels;
 
 namespace Viandas.Infrastructure.Data.Db
 {
     public class AppDb : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Menu> Menu { get; set; }
-        public DbSet<MenuOption> MenuOptions { get; set; }
-        public DbSet<Dish> Dish { get; set; }
-        public DbSet<Discount> Discount { get; set; }
+     
+       public DbSet<UserModel> User { get; set; }   
+       public DbSet<DiscountModel> Discount { get; set; }   
+       public DbSet<DishModel> Dish { get; set; }
+       public DbSet<MenuModel> Menu { get; set; }
+       public DbSet<MenuOptionModel> MenuOption { get; set; }
+       public DbSet<OrderModel> Orders { get; set; }
+       public DbSet<OrderItemModel> OrderItems { get; set; }
 
-        public DbSet<Order> Order { get; set; }
-        public DbSet<OrderItem> OrderItem { get; set; }
-        public DbSet<OrderTransition> OrderTransition { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer();
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new UserModelConfig());
+            modelBuilder.ApplyConfiguration(new DiscountModelConfig());
+            modelBuilder.ApplyConfiguration(new OrderModelConfig());
+            modelBuilder.ApplyConfiguration(new OrderItemModelConfig());
+            modelBuilder.ApplyConfiguration(new MenuModelConfig());
+            modelBuilder.ApplyConfiguration(new DishModelConfig());
+            modelBuilder.ApplyConfiguration(new MenuOptionConfig());
+        }
     }
 }

@@ -10,12 +10,25 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
         private string _userID;
         private DateTime _creationDate;
 
+        public string Id => _dishID;
+        public string UserID => _userID;
+
         public Dish(string id, string description, decimal price, string userID)
         {
             _dishID = id;
             _description = CheckDescriptionIsValid(description);
             _price = CheckPriceIsValid(price);
             _userID = userID;
+            _creationDate = DateTime.Now;
+        }
+
+        public Dish(string dishID, string description, decimal price, string userID, DateTime creationDate)
+        {
+            _dishID = dishID;
+            _description = description;
+            _price = price;
+            _userID = userID;
+            _creationDate = creationDate;
         }
 
         private string CheckDescriptionIsValid(string description)
@@ -46,6 +59,11 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
         public void ChangeDescription(string description)
         {
             this._description = CheckDescriptionIsValid(description);
+        }
+
+        public decimal GetPrice()
+        {
+            return _price;
         }
     }
 }

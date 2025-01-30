@@ -26,7 +26,7 @@
             UserID = userId;
             _discount = discount;
 
-            DiscountID = _discount._discountID;
+            DiscountID = ""; //TODO: revisar el codigodel descuento
             Status = OrderStatus.CONFIRMED;
 
             Items = new List<OrderItem>();

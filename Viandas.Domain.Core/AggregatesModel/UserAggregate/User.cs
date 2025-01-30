@@ -50,6 +50,11 @@
             return _isActivate;
         }
 
+        public string GetId()
+        {
+            return _id;
+        }
+
         public void ChangePassword(string password)
         {
             _userPassword = new UserPassword(password);
@@ -57,7 +62,7 @@
         }
         public void ResetPassword()
         {
-            _userPassword = new UserPassword(_userID);
+            _userPassword = new UserPassword(_id);
             _password = _userPassword.Value;
         }
     }
