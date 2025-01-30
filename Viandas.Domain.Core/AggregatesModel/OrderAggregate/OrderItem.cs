@@ -15,8 +15,8 @@ namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
         {
             option.TakeQuantity(units);
 
-            MenuID = option.MenuID;
-            DishID = option.DishID;
+            MenuID = option._menuID;
+            DishID = option._dishID;
             Price = option.GetPrice();
             Description = option.GetDescription();
         }

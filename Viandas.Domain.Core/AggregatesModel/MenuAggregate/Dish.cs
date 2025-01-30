@@ -4,18 +4,18 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
 {
     public class Dish
     {
-        public string Id { get; private set; }
-        public string Description { get; private set; }
-        public decimal Price { get; private set; }
-        public string UserID { get; private set; }
-        public DateTime CretionDate { get; private set; }
+        private string _dishID;
+        private string _description;
+        private decimal _price;
+        private string _userID;
+        private DateTime _creationDate;
 
         public Dish(string id, string description, decimal price, string userID)
         {
-            Id = id;
-            Description = CheckDescriptionIsValid(description);
-            Price = CheckPriceIsValid(price);
-            UserID = userID;
+            _dishID = id;
+            _description = CheckDescriptionIsValid(description);
+            _price = CheckPriceIsValid(price);
+            _userID = userID;
         }
 
         private string CheckDescriptionIsValid(string description)
@@ -40,12 +40,12 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
 
         public void ChangePrice(decimal price)
         {
-            this.Price = CheckPriceIsValid(price);
+            this._price = CheckPriceIsValid(price);
         }
 
         public void ChangeDescription(string description)
         {
-            this.Description = CheckDescriptionIsValid(description);
+            this._description = CheckDescriptionIsValid(description);
         }
     }
 }

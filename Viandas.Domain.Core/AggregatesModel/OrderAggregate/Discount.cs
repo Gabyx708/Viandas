@@ -4,10 +4,10 @@ namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
 {
     public class Discount
     {
-        public string DiscountID { get; private set; }
-        public DateTime CreationDate { get; private set; }
-        public string UserID { get; private set; }
-        public decimal Amount { get;private set; }
+        private string _discountID;
+        private DateTime _creationDate;
+        private string _userID;
+        private decimal _amount;
 
         public Discount(string discountId,string userId,decimal amount)
         {
@@ -16,14 +16,14 @@ namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
                 throw new ViandasDomainCoreException("the discount must be greater than 1%");
             }
 
-            DiscountID = discountId;
-            UserID = userId;
-            CreationDate = DateTime.Now;
+            _discountID = discountId;
+            _userID = userId;
+            _creationDate = DateTime.Now;
         }
 
         public decimal GetAmount()
         {
-            return Amount;
+            return _amount;
         }
     }
 }

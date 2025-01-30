@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Viandas.Domain.Core\Viandas.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>

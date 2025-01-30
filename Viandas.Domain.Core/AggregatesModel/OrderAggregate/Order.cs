@@ -26,7 +26,7 @@
             UserID = userId;
             _discount = discount;
 
-            DiscountID = _discount.DiscountID;
+            DiscountID = _discount._discountID;
             Status = OrderStatus.CONFIRMED;
 
             Items = new List<OrderItem>();

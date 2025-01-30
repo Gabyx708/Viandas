@@ -4,21 +4,21 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
 {
     public class MenuOption
     {
-        public string MenuID { get; private set; }
-        public string DishID { get; private set; }
-        public int Stock { get; private set; }
-        public int RequestedQuantity { get; private set; }
-        public decimal Price { get; private set; }
+        private string _menuID;
+        private string _dishID;
+        private int Stock;
+        private int _requestedQuantity;
+        private decimal _price;
 
         private readonly Dish _dish;
 
         public MenuOption(string menuId, Dish dish, int stock)
         {
-            MenuID = menuId;
-            DishID = dish.Id;
+            _menuID = menuId;
+            _dishID = dish._dishID;
 
             _dish = dish;
-            Price = dish.Price;
+            _price = dish._price;
             Stock = CheckStockIsValid(stock);
         }
 
@@ -44,18 +44,18 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
                 throw new ViandasDomainCoreException("insufficient stock");
             }
 
-            RequestedQuantity += quantity;
+            _requestedQuantity += quantity;
             Stock -= quantity;
         }
 
         public string GetDescription()
         {
-            return _dish.Description;
+            return _dish._description;
         }
 
         public decimal GetPrice()
         {
-            return _dish.Price;
+            return _dish._price;
         }
     }
 }

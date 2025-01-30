@@ -2,15 +2,15 @@
 {
     public class User
     {
-        public string Id { get; private set; }
-        public string NickName { get; private set; }
-        public string Name { get; private set; }
-        public string LastName { get; private set; }
-        public string Password { get; private set; }
-        public bool IsActivate { get; private set; }
-        public DateTime BirthDate { get; private set; }
-        public DateTime CreationDate { get; private set; }
-        public UserRol Rol { get; private set; }
+        private string _id;
+        private string _nickName;
+        private string _name;
+        private string _lastName;
+        private string _password;
+        private bool _isActivate;
+        private DateTime _birthDate;
+        private DateTime _creationDate;
+        private UserRol _rol;
 
         private UserID _userID;
         private UserPassword _userPassword;
@@ -24,41 +24,41 @@
         public User(string id, string nickName, string name, string lastName, string plainPassword, DateTime birthDate)
         {
             _userID = new UserID(id);
-            Id = _userID.Value;
-            NickName = nickName;
-            Name = name;
-            LastName = lastName;
+            _id = _userID.Value;
+            _nickName = nickName;
+            _name = name;
+            _lastName = lastName;
             _userPassword = new UserPassword(plainPassword);
-            Password = _userPassword.Value;
-            BirthDate = birthDate;
+            _password = _userPassword.Value;
+            _birthDate = birthDate;
 
-            Rol = UserRol.Normal;
+            _rol = UserRol.Normal;
         }
 
         public void SetRol(UserRol rol)
         {
-            this.Rol = rol;
+            this._rol = rol;
         }
 
         public string GetFullName()
         {
-            return $"{Name} {LastName}";
+            return $"{_name} {_lastName}";
         }
 
         public bool GetIsActivated()
         {
-            return IsActivate;
+            return _isActivate;
         }
 
         public void ChangePassword(string password)
         {
             _userPassword = new UserPassword(password);
-            Password = _userPassword.Value;
+            _password = _userPassword.Value;
         }
         public void ResetPassword()
         {
-            _userPassword = new UserPassword(Id);
-            Password = _userPassword.Value;
+            _userPassword = new UserPassword(_userID);
+            _password = _userPassword.Value;
         }
     }
 }
