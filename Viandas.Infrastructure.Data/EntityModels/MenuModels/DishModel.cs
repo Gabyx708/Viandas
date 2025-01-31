@@ -9,5 +9,7 @@
         public DateTime CreationDate { get; set; }
 
         public required UserModel User { get; set; }
+        public required virtual ICollection<MenuOptionModel> Options { get; set; }
+
     }
 }

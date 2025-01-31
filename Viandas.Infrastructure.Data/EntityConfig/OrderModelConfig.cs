@@ -8,9 +8,17 @@ namespace Viandas.Infrastructure.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<OrderModel> builder)
         {
-            builder.ToTable("order");
+            builder.ToTable("orders");
 
             builder.HasKey(o => o.OrderID);
+
+            builder.HasOne(o => o.UserModel)
+                    .WithMany(u => u.Orders)
+                    .HasForeignKey(o => o.UserID);
+
+            builder.HasOne(o => o.DiscountModel)
+                   .WithMany(d => d.OrderModels)
+                   .HasForeignKey(o => o.DiscountID);
         }
     }
 }

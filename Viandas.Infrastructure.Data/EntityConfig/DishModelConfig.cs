@@ -16,8 +16,6 @@ namespace Viandas.Infrastructure.Data.EntityConfig
                     .WithMany()
                     .HasForeignKey(d => d.UserID);
 
-
-
         }
     }
 

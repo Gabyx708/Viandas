@@ -1,6 +1,7 @@
-﻿using Viandas.Infrastructure.Data.EntityModel;
+﻿using System.Collections.ObjectModel;
+using Viandas.Infrastructure.Data.EntityModel;
 
-namespace Viandas.Infrastructure.Data.EntityModels
+namespace Viandas.Infrastructure.Data.EntityModels.OrderModels
 {
     public class DiscountModel
     {
@@ -10,5 +11,6 @@ namespace Viandas.Infrastructure.Data.EntityModels
         public decimal Amount { get; set; }
 
         public required virtual UserModel User { get; set; }
+        public required virtual Collection<OrderModel> OrderModels { get; set; }
     }
 }

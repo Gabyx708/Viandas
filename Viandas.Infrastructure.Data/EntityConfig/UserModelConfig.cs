@@ -8,7 +8,11 @@ namespace Viandas.Infrastructure.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<UserModel> builder)
         {
+            builder.ToTable("Users");
+
             builder.HasKey(u => u.UserID);
+
+
         }
     }
 }

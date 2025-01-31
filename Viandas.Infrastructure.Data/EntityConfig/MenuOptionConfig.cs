@@ -18,7 +18,7 @@ namespace Viandas.Infrastructure.Data.EntityConfig
               .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(o => o.Dish)
-              .WithMany()
+              .WithMany(m => m.Options)
               .HasForeignKey(o => o.DishID)
               .OnDelete(DeleteBehavior.Restrict);
         }

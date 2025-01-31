@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Viandas.Infrastructure.Data.Db;
 
 #nullable disable
@@ -18,28 +18,28 @@ namespace Viandas.Infrastructure.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.DishModel", b =>
                 {
                     b.Property<string>("DishID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("DishID");
 
@@ -51,20 +51,20 @@ namespace Viandas.Infrastructure.Data.Migrations
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.MenuModel", b =>
                 {
                     b.Property<string>("MenuID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("ConsumptionDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("OrderDeadLine")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserResponsibleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("MenuID");
 
@@ -76,19 +76,19 @@ namespace Viandas.Infrastructure.Data.Migrations
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.MenuOptionModel", b =>
                 {
                     b.Property<string>("MenuID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("DishID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<int>("RequestedQuantity")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Stock")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("MenuID", "DishID");
 
@@ -100,24 +100,24 @@ namespace Viandas.Infrastructure.Data.Migrations
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.OrderModel", b =>
                 {
                     b.Property<string>("OrderID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DiscountID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("MenuModelMenuID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("OrderID");
 
@@ -127,98 +127,122 @@ namespace Viandas.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("order", (string)null);
+                    b.ToTable("orders", (string)null);
                 });
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.UserModel", b =>
                 {
                     b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("EncryptedPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsActivated")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("Rol")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserNickname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserID");
 
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.DiscountModel", b =>
-                {
-                    b.Property<string>("DiscountID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DiscountID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Discount");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderItemModel", b =>
                 {
                     b.Property<string>("OrderID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("MenuID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("DishID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderModelOrderID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<int>("Units")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("OrderID", "MenuID", "DishID");
 
-                    b.HasIndex("OrderModelOrderID");
+                    b.HasIndex("MenuID", "DishID");
 
                     b.ToTable("itemsDeOrdenes", (string)null);
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderModels.DiscountModel", b =>
+                {
+                    b.Property<string>("DiscountID")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("DiscountID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Discount", (string)null);
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderModels.OrderTransitionModel", b =>
+                {
+                    b.Property<string>("OrderID")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FromStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ToStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("text");
+
+                    b.HasKey("OrderID", "UserID", "FromStatus", "ToStatus");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("OrderTransitions");
                 });
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.DishModel", b =>
@@ -246,7 +270,7 @@ namespace Viandas.Infrastructure.Data.Migrations
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.MenuOptionModel", b =>
                 {
                     b.HasOne("Viandas.Infrastructure.Data.EntityModel.DishModel", "Dish")
-                        .WithMany()
+                        .WithMany("Options")
                         .HasForeignKey("DishID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -264,8 +288,8 @@ namespace Viandas.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.OrderModel", b =>
                 {
-                    b.HasOne("Viandas.Infrastructure.Data.EntityModels.DiscountModel", "Discount")
-                        .WithMany()
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModels.OrderModels.DiscountModel", "DiscountModel")
+                        .WithMany("OrderModels")
                         .HasForeignKey("DiscountID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -274,33 +298,69 @@ namespace Viandas.Infrastructure.Data.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("MenuModelMenuID");
 
-                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.UserModel", "User")
-                        .WithMany()
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.UserModel", "UserModel")
+                        .WithMany("Orders")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Discount");
+                    b.Navigation("DiscountModel");
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.DiscountModel", b =>
-                {
-                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.UserModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.Navigation("UserModel");
                 });
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderItemModel", b =>
                 {
-                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.OrderModel", null)
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.OrderModel", "OrderModel")
                         .WithMany("Items")
-                        .HasForeignKey("OrderModelOrderID");
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.MenuOptionModel", "MenuOptionModel")
+                        .WithMany("OrderItemModels")
+                        .HasForeignKey("MenuID", "DishID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuOptionModel");
+
+                    b.Navigation("OrderModel");
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderModels.DiscountModel", b =>
+                {
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderModels.OrderTransitionModel", b =>
+                {
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.OrderModel", "OrderModel")
+                        .WithMany("Transitions")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Viandas.Infrastructure.Data.EntityModel.UserModel", "UserModel")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderModel");
+
+                    b.Navigation("UserModel");
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.DishModel", b =>
+                {
+                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.MenuModel", b =>
@@ -310,9 +370,26 @@ namespace Viandas.Infrastructure.Data.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.MenuOptionModel", b =>
+                {
+                    b.Navigation("OrderItemModels");
+                });
+
             modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.OrderModel", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Transitions");
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModel.UserModel", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Viandas.Infrastructure.Data.EntityModels.OrderModels.DiscountModel", b =>
+                {
+                    b.Navigation("OrderModels");
                 });
 #pragma warning restore 612, 618
         }

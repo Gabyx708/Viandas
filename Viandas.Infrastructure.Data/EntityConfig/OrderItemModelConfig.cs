@@ -12,6 +12,14 @@ namespace Viandas.Infrastructure.Data.EntityConfig
 
             builder.HasKey(o => new { o.OrderID, o.MenuID, o.DishID });
 
+            builder.HasOne(ot => ot.OrderModel)
+                    .WithMany(o => o.Items)
+                    .HasForeignKey(ot => ot.OrderID);
+
+            builder.HasOne(ot => ot.MenuOptionModel)
+                   .WithMany(mop => mop.OrderItemModels)
+                   .HasForeignKey(ot => new { ot.MenuID, ot.DishID });
+
         }
     }
 }

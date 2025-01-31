@@ -13,5 +13,7 @@ namespace Viandas.Infrastructure.Data.EntityModel
         public DateTime BirthDate { get; set; }
         public DateTime CreationDate { get; set; }
         public User.UserRol Rol { get; set; }
+
+        public virtual required ICollection<OrderModel> Orders { get; set; }
     }
 }

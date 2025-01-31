@@ -18,7 +18,7 @@ namespace Viandas.Infrastructure.Data.EntityConfig
               .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(m => m.Responsible)
-              .WithMany() 
+              .WithMany()
               .HasForeignKey(m => m.UserResponsibleId);
         }
     }

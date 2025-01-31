@@ -1,4 +1,6 @@
-﻿namespace Viandas.Infrastructure.Data.EntityModel
+﻿using Viandas.Infrastructure.Data.EntityModels;
+
+namespace Viandas.Infrastructure.Data.EntityModel
 {
     public class MenuOptionModel
     {
@@ -10,5 +12,7 @@
 
         public required DishModel Dish { get; set; }
         public required MenuModel Menu { get; set; }
+
+        public required virtual ICollection<OrderItemModel> OrderItemModels { get; set; }
     }
 }
