@@ -1,8 +1,9 @@
-﻿using Viandas.Infrastructure.Data.EntityModels;
+﻿using Viandas.Domain.Core.AggregatesModel.MenuAggregate;
+using Viandas.Infrastructure.Data.EntityModels;
 
 namespace Viandas.Infrastructure.Data.EntityModel
 {
-    public class MenuOptionModel
+    public class MenuOptionModel : IEntityModel<MenuOption,MenuOptionModel>
     {
         public required string MenuID { get; set; }
         public required string DishID { get; set; }
@@ -14,5 +15,15 @@ namespace Viandas.Infrastructure.Data.EntityModel
         public required MenuModel Menu { get; set; }
 
         public required virtual ICollection<OrderItemModel> OrderItemModels { get; set; }
+
+        public MenuOption MapToEntity()
+        {
+            throw new NotImplementedException();
+        }
+
+        public MenuOptionModel MapToModel(MenuOption entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

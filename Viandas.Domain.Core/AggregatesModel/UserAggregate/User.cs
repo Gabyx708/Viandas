@@ -21,6 +21,14 @@
             Normal
         }
 
+        public string Name => _name;
+        public string LastName => _lastName;
+        public string NickName => _nickName;
+        public string Password => _password;
+        public DateTime CreationDate => _creationDate;
+        public DateTime BirthDate => _birthDate;
+        public UserRol Rol => _rol;
+
         public User(string id, string nickName, string name, string lastName, string plainPassword, DateTime birthDate)
         {
             _userID = new UserID(id);
@@ -33,6 +41,30 @@
             _birthDate = birthDate;
 
             _rol = UserRol.Normal;
+        }
+
+        public User(string id,
+                    string nickName,
+                    string name,
+                    string lastName,
+                    string password,
+                    bool isActivate,
+                    DateTime birthDate,
+                    DateTime creationDate,
+                    UserRol rol)
+        {
+            _id = id;
+            _nickName = nickName;
+            _name = name;
+            _lastName = lastName;
+            _password = password;
+            _isActivate = isActivate;
+            _birthDate = birthDate;
+            _creationDate = creationDate;
+            _rol = rol;
+
+            _userID = new UserID(id);
+            _userPassword = new UserPassword(password);
         }
 
         public void SetRol(UserRol rol)

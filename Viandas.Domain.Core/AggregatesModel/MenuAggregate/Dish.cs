@@ -12,6 +12,8 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
 
         public string Id => _dishID;
         public string UserID => _userID;
+        public string Description => _description;
+        public DateTime CreationDate => _creationDate;
 
         public Dish(string id, string description, decimal price, string userID)
         {

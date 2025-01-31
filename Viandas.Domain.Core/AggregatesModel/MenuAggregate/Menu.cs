@@ -14,6 +14,10 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
 
         public string Id => _menuID;
         public string UserID => _userResponsibleId;
+        public DateTime CreationDate => _creationDate;
+        public DateTime ConsumptionDate => _consumptionDate;
+        public DateTime OrderDeadLine => _orderDeadLine;
+        public User Responsible => _user;
         public IReadOnlyCollection<MenuOption> Options => _options;
         public IReadOnlyCollection<Order> Orders => _orders;
 

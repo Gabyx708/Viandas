@@ -4,17 +4,29 @@ using Viandas.Infrastructure.Data.EntityModels.OrderModels;
 
 namespace Viandas.Infrastructure.Data.EntityModel
 {
-    public class OrderModel
+    public class OrderModel : IEntityModel<Order,OrderModel>
     {
-        public required string OrderID { get; set; }
-        public required string UserID { get; set; }
-        public required string DiscountID { get; set; }
-        public required Order.OrderStatus OrderStatus { get; set; }
+        public  string? OrderID { get; set; }
+        public  string? UserID { get; set; }
+        public  string? DiscountID { get; set; }
+        public  Order.OrderStatus OrderStatus { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public required UserModel UserModel { get; set; }
-        public required DiscountModel DiscountModel { get; set; }
-        public required virtual ICollection<OrderItemModel> Items { get; set; }
-        public required virtual ICollection<OrderTransitionModel> Transitions { get; set; }
+        public  UserModel? UserModel { get; set; }
+        public  DiscountModel? DiscountModel { get; set; }
+        public  virtual ICollection<OrderItemModel>? Items { get; set; }
+        public  virtual ICollection<OrderTransitionModel>? Transitions { get; set; }
+
+
+
+        public Order MapToEntity()
+        {
+            throw new NotImplementedException();
+        }
+
+        public OrderModel MapToModel(Order entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

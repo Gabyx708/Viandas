@@ -9,6 +9,8 @@ namespace Viandas.Domain.Core.AggregatesModel.OrderAggregate
         private string _userID;
         private decimal _amount;
 
+        public string Id => _discountID;
+
         public Discount(string discountId,string userId,decimal amount)
         {
             if(amount < 1)
