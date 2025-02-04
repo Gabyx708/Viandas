@@ -1,5 +1,5 @@
 ﻿using Viandas.Application.DTO.UserDTO;
-using Viandas.Application.Interface;
+using Viandas.Application.Interface.IUser;
 using Viandas.Domain.Core.AggregatesModel.UserAggregate;
 using Viandas.Infrastructure.Interface.IRepositories;
 

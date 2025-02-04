@@ -1,4 +1,4 @@
-using Viandas.Application.Interface;
+using Viandas.Application.Interface.IUser;
 using Viandas.Application.Main.UseCase.v1.Users;
 using Viandas.Infrastructure.Data.Db;
 using Viandas.Infrastructure.Interface.IRepositories;

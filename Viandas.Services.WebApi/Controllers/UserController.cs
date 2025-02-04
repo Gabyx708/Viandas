@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Viandas.Application.DTO.UserDTO;
-using Viandas.Application.Interface;
+using Viandas.Application.Interface.IUser;
 
 namespace Viandas.Services.WebApi.Controllers
 {
@@ -17,16 +17,17 @@ namespace Viandas.Services.WebApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         public IActionResult CreateNewUser(CreateUserDTO user)
         {
             bool response = _create.CreateUser(user);
-            
-            if(response)
+
+            if (response)
             {
-                return Ok();
+                return Created();
             }
 
-            return BadRequest();
+            return BadRequest("failed to create user");
         }
     }
 }

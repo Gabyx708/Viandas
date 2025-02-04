@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viandas.Application.DTO", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C4405956-0E7B-4482-AA28-1BA2D3368523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viandas.Transversal.Mapper", "Viandas.Transversal.Mapper\Viandas.Transversal.Mapper.csproj", "{D4024E90-C564-48FD-A661-7ED7970A9008}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viandas.Transversal.Common", "Viandas.Transversal.Mapper\Viandas.Transversal.Common.csproj", "{D4024E90-C564-48FD-A661-7ED7970A9008}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viandas.Services.WebApi", "Viandas.Services.WebApi\Viandas.Services.WebApi.csproj", "{45B514C7-958C-4318-925E-1692D2FFD82D}"
 EndProject

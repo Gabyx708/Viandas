@@ -1,6 +1,6 @@
 ﻿using Viandas.Application.DTO.UserDTO;
 
-namespace Viandas.Application.Interface
+namespace Viandas.Application.Interface.IUser
 {
     public interface ICreateUser
     {
