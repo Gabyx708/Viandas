@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Viandas.Application.Main
+namespace Viandas.Transversal.Mapper
 {
-    internal class Program
+    public static class UserMapper
     {
-        public static void Main()
-        {
-
-        }
     }
 }

@@ -6,7 +6,8 @@
 
         public UserPassword(string password) 
         {
-            Value = password;
+            //Value = password;
+            Value = "super secreto";
         }
     }
 }

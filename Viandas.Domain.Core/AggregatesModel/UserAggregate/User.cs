@@ -39,6 +39,9 @@
             _userPassword = new UserPassword(plainPassword);
             _password = _userPassword.Value;
             _birthDate = birthDate;
+            _creationDate = DateTime.Now;
+
+            _isActivate = true;
 
             _rol = UserRol.Normal;
         }

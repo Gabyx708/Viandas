@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Viandas.Application.Interface\Viandas.Application.Interface.csproj" />
+    <ProjectReference Include="..\Viandas.Application.Main\Viandas.Application.Main.csproj" />
+    <ProjectReference Include="..\Viandas.Infrastructure.Repository\Viandas.Infrastructure.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
