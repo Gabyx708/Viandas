@@ -20,15 +20,20 @@ namespace Viandas.Application.Main.UseCase.v1.Users
 
             if (user == null)
             {
-                return 
+                throw new NullReferenceException();
             }
 
             return MapToGetUser(user);
         }
 
-        public List<GetUserDTO> GetUsers()
+        public GetUsersDTO GetUsers()
         {
-            throw new NotImplementedException();
+            var users = _userRepository.GetActivatedUsers();
+
+           List<GetUserDTO> usersDTO = users.Select(u => MapToGetUser(u))
+                                            .ToList();
+
+            return new GetUsersDTO(usersDTO);
         }
 
         private GetUserDTO MapToGetUser(User user)

@@ -90,6 +90,11 @@
             return _id;
         }
 
+        public void Disable()
+        {
+            _isActivate = false;
+        }
+
         public void ChangePassword(string password)
         {
             _userPassword = new UserPassword(password);

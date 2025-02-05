@@ -1,4 +1,5 @@
-﻿using Viandas.Domain.Core.AggregatesModel.UserAggregate;
+﻿using Microsoft.EntityFrameworkCore;
+using Viandas.Domain.Core.AggregatesModel.UserAggregate;
 using Viandas.Infrastructure.Data.Db;
 using Viandas.Infrastructure.Data.EntityModel;
 using Viandas.Infrastructure.Interface.IRepositories;
@@ -39,7 +40,7 @@ namespace Viandas.Infrastructure.Repository
                 return found.MapToEntity();
             }
 
-            throw new InvalidDataException();
+            throw new NullReferenceException();
         }
 
         public User InsertUser(User user)
@@ -54,11 +55,22 @@ namespace Viandas.Infrastructure.Repository
 
         public User UpdateUser(User user)
         {
+            var existingUser = _context.User.
+                                        Local.
+                                        FirstOrDefault(u => u.UserID == user.GetId());
+
+            if (existingUser != null)
+            {
+                _context.Entry(existingUser).State = EntityState.Detached;
+            }
+
             var map = new UserModel().MapToModel(user);
 
-            _context.User.Update(map);
+            _context.Entry(map).State = EntityState.Modified;
             _context.SaveChanges();
+
             return user;
         }
+
     }
 }

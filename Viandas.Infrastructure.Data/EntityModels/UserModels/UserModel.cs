@@ -26,8 +26,8 @@ namespace Viandas.Infrastructure.Data.EntityModel
                             lastName: LastName!,
                             password: EncryptedPassword!,
                             isActivate: IsActivated,
-                            birthDate: BirthDate,
-                            creationDate: CreationDate,
+                            birthDate: BirthDate.ToLocalTime(),
+                            creationDate: CreationDate.ToLocalTime(),
                             rol:  Rol
                             );
         }

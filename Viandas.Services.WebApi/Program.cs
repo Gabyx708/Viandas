@@ -11,13 +11,20 @@ builder.Services.AddDbContext<AppDb>();
 
 //user
 builder.Services.AddScoped<ICreateUser, CreateUser>();
+builder.Services.AddScoped<IQueryUser, QueryUser>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDeleteUser, DeleteUser>();
 
 builder.Services.AddControllers()
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 });
+
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
