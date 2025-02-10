@@ -70,5 +70,9 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
             return _dish.GetPrice();
         }
 
+        public int GetAvailable()
+        {
+            return _stock - _requestedQuantity;
+        }
     }
 }

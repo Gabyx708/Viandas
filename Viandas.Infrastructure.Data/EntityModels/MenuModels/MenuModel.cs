@@ -6,22 +6,22 @@ namespace Viandas.Infrastructure.Data.EntityModel
 {
     public class MenuModel : IEntityModel<Menu,MenuModel>
     {
-        public required string MenuID { get; set; }
-        public required string UserResponsibleId { get; set; }
+        public string MenuID { get; set; } = null!;
+        public string UserResponsibleId { get; set; } = null!;
         public DateTime CreationDate { get; set; }
         public DateTime ConsumptionDate { get; set; }
         public DateTime OrderDeadLine { get; set; }
-        public required UserModel Responsible { get; set; }
-        public required virtual ICollection<MenuOptionModel> Options { get; set; }
-        public required virtual ICollection<OrderModel> Orders { get; set; }
+        public UserModel Responsible { get; set; } = null!;
+        public virtual ICollection<MenuOptionModel> Options { get; set; } = null!;
+        public virtual ICollection<OrderModel> Orders { get; set; } = null!;
 
         public  Menu MapToEntity()
         {
             return new Menu(menuId: MenuID,
                             user: Responsible.MapToEntity(),
-                            consumptionDate: ConsumptionDate,
-                            orderDeadLine: OrderDeadLine,
-                            creationDate: CreationDate,
+                            consumptionDate: ConsumptionDate.ToLocalTime(),
+                            orderDeadLine: OrderDeadLine.ToLocalTime(),
+                            creationDate: CreationDate.ToLocalTime(),
                             orders: MapOrderModelsToOrders(),
                             options: MapModelMenuOptionToMenuOption()
                             );
@@ -33,11 +33,11 @@ namespace Viandas.Infrastructure.Data.EntityModel
             {
                 MenuID = entity.Id,
                 UserResponsibleId = entity._userResponsibleId,
-                CreationDate = entity.CreationDate,
-                ConsumptionDate = entity.ConsumptionDate,
-                OrderDeadLine = entity.OrderDeadLine,
+                CreationDate = entity.CreationDate.ToUniversalTime(),
+                ConsumptionDate = entity.ConsumptionDate.ToUniversalTime(),
+                OrderDeadLine = entity.OrderDeadLine.ToUniversalTime(),
                 Responsible = null,
-                Options = null,
+                Options = entity.GetOptions().Select(op => new MenuOptionModel().MapToModel(op)),
                 Orders = entity.Orders.Select(o => new OrderModel().MapToModel(o)).ToList()
             };
         }
