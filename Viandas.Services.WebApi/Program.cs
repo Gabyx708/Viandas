@@ -1,4 +1,6 @@
+using Viandas.Application.Interface.IDish;
 using Viandas.Application.Interface.IUser;
+using Viandas.Application.Main.UseCase.v1.Dishes;
 using Viandas.Application.Main.UseCase.v1.Users;
 using Viandas.Infrastructure.Data.Db;
 using Viandas.Infrastructure.Interface.IRepositories;
@@ -14,6 +16,12 @@ builder.Services.AddScoped<ICreateUser, CreateUser>();
 builder.Services.AddScoped<IQueryUser, QueryUser>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDeleteUser, DeleteUser>();
+
+//dish
+builder.Services.AddScoped<IDishRepository, DishRepository>();
+builder.Services.AddScoped<ICreateDish, CreateDish>();
+builder.Services.AddScoped<IQueryDish, QueryDish>();
+builder.Services.AddScoped<IUpdateDishesPrice, UpdateDishesPrices>();
 
 builder.Services.AddControllers()
                 .AddJsonOptions(options =>

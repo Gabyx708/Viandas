@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Viandas.Application.Interface\Viandas.Application.Interface.csproj" />
     <ProjectReference Include="..\Viandas.Infrastructure.Interface\Viandas.Infrastructure.Interface.csproj" />
+    <ProjectReference Include="..\Viandas.Transversal.Mapper\Viandas.Transversal.Common.csproj" />
   </ItemGroup>
 
 </Project>

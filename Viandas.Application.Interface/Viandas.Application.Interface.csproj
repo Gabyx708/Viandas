@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Viandas.Application.DTO\Viandas.Application.DTO.csproj" />
+    <ProjectReference Include="..\Viandas.Transversal.Mapper\Viandas.Transversal.Common.csproj" />
   </ItemGroup>
 
 </Project>

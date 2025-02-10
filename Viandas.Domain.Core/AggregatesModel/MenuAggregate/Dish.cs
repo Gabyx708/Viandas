@@ -15,9 +15,9 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
         public string Description => _description;
         public DateTime CreationDate => _creationDate;
 
-        public Dish(string id, string description, decimal price, string userID)
+        public Dish(string description, decimal price, string userID)
         {
-            _dishID = id;
+            _dishID = CreateId(userID);
             _description = CheckDescriptionIsValid(description);
             _price = CheckPriceIsValid(price);
             _userID = userID;
@@ -67,5 +67,12 @@ namespace Viandas.Domain.Core.AggregatesModel.MenuAggregate
         {
             return _price;
         }
+
+        private string CreateId(string userId)
+        {
+            string timestamp = DateTime.Now.Ticks.ToString();
+            return $"DS-{timestamp}-{userId}";
+        }
+
     }
 }

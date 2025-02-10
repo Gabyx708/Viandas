@@ -5,18 +5,18 @@ namespace Viandas.Infrastructure.Data.EntityModel
 {
     public class DishModel : IEntityModel<Dish,DishModel>
     {
-        public required string DishID { get; set; }
-        public required string Description { get; set; }
+        public string DishID { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public decimal Price { get; set; }
-        public required string UserID { get; set; }
+        public string UserID { get; set; } = null!;
         public DateTime CreationDate { get; set; }
 
-        public required UserModel User { get; set; }
-        public required virtual ICollection<MenuOptionModel> Options { get; set; }
+        public  UserModel? User { get; set; }
+        public  virtual ICollection<MenuOptionModel>? Options { get; set; }
 
         public Dish MapToEntity()
         {
-            return new Dish(DishID,Description,Price, UserID);
+            return new Dish(DishID,Description,Price, UserID,CreationDate.ToLocalTime());
         }
 
         public DishModel MapToModel(Dish dish)
@@ -27,9 +27,9 @@ namespace Viandas.Infrastructure.Data.EntityModel
                 Description = dish.Description,
                 Price = dish.GetPrice(),
                 UserID = dish.UserID,
-                CreationDate = dish.CreationDate,
+                CreationDate = dish.CreationDate.ToUniversalTime(),
                 User = null,
-                Options = null
+                Options = new List<MenuOptionModel>()
             };
         }
 
